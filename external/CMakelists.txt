@@ -1,0 +1,47 @@
+set(target_name imgui)
+
+add_library(${target_name} STATIC "")
+
+find_package(glfw3 CONFIG REQUIRED)
+
+target_link_libraries(${target_name} PRIVATE glfw)
+
+target_sources(${target_name}
+	# cpp
+	PRIVATE
+		# GLFW
+		"${PROJECT_SOURCE_DIR}/external/imgui/backends/imgui_impl_glfw.cpp"
+		# OpenGL3
+		"${PROJECT_SOURCE_DIR}/external/imgui/backends/imgui_impl_opengl3.cpp"
+
+		# sources
+		"${PROJECT_SOURCE_DIR}/external/imgui/imgui.cpp"
+		"${PROJECT_SOURCE_DIR}/external/imgui/imgui_demo.cpp"
+		"${PROJECT_SOURCE_DIR}/external/imgui/imgui_draw.cpp"
+		"${PROJECT_SOURCE_DIR}/external/imgui/imgui_tables.cpp"
+		"${PROJECT_SOURCE_DIR}/external/imgui/imgui_widgets.cpp"
+
+	# headers
+	PRIVATE
+		# GLFW
+		"${PROJECT_SOURCE_DIR}/external/imgui/backends/imgui_impl_glfw.h"
+		# OpenGL3
+		"${PROJECT_SOURCE_DIR}/external/imgui/backends/imgui_impl_opengl3.h"
+		"${PROJECT_SOURCE_DIR}/external/imgui/backends/imgui_impl_opengl3_loader.h"
+
+		# sources
+		"${PROJECT_SOURCE_DIR}/external/imgui/imconfig.h"
+		"${PROJECT_SOURCE_DIR}/external/imgui/imgui.h"
+		"${PROJECT_SOURCE_DIR}/external/imgui/imgui_internal.h"
+		"${PROJECT_SOURCE_DIR}/external/imgui/imstb_rectpack.h"
+		"${PROJECT_SOURCE_DIR}/external/imgui/imstb_textedit.h"
+		"${PROJECT_SOURCE_DIR}/external/imgui/imstb_truetype.h"
+)
+
+target_include_directories(${target_name}
+	PUBLIC
+		"${PROJECT_SOURCE_DIR}/include"
+		"${PROJECT_SOURCE_DIR}/external/imgui"
+		"${PROJECT_SOURCE_DIR}/external/imgui/backends"
+		"${PROJECT_BINARY_DIR}"
+)
