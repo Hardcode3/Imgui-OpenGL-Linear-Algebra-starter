@@ -1,97 +1,87 @@
 message(STATUS "> Found external directory")
 
-# glfw configuration
-if(NOT RAYTRACING_GLFW_GIT_SUBPACKAGES_DEPENDENCY)
-	message(STATUS "> Searching for external GLFW...")
-	find_package(glfw3 CONFIG REQUIRED)
-endif()
-
-if(glfw OR EXISTS glfw_INCLUDE_DIR)
-	message(STATUS "> Discovered  preinstalled GLFW")
-
+# glfw configuration	
+# checks if git submodule is already downloaded or not
+if ((NOT EXISTS ${PROJECT_SOURCE_DIR}/external/glfw) OR 
+	(NOT IS_DIRECTORY ${PROJECT_SOURCE_DIR}/external/glfw))
+	message(STATUS "> Cloning imgui from remote...")
+	execute_process(
+		COMMAND git submodule update --init glfw
+		WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR})
 else()
-   	message(NOTICE "> Missing glfw3")
-	
-	if(RAYTRACING_GLFW_GIT_SUBPACKAGES_DEPENDENCY)
-		# git stuff
-		message(NOTICE "> Checking submodule folder...")
-		if (
-			(NOT EXISTS ${PROJECT_SOURCE_DIR}/external/glfw) OR 
-			(NOT IS_DIRECTORY ${PROJECT_SOURCE_DIR}/external/glfw)
-		)
-			message(NOTICE "> GLFW gitsubmodule folder not initialized")
-			message(STATUS "> Cloning imgui from remote...")
-			execute_process(
-				COMMAND git submodule update --init glfw
-				WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-			)
-			message(STATUS "> Finished cloning GLFW from remote")
-		endif()
-	else()
-		message(NOTICE "> GLFW submodule folder already initialized")
-	endif()
+	message(STATUS "> GLFW submodule folder initialized")
+endif()
 
-	if(RAYTRACING_GLFW_GIT_SUBPACKAGES_DEPENDENCY)
-		add_subdirectory(glfw)
-		include_directories(${glfw_INCLUDE_DIR})
-	endif()
+# search for OpenGL
+find_package(OpenGL REQUIRED)
+include_directories( ${OPENGL_INCLUDE_DIRS} )
+set(GLFW_BUILD_DOCS OFF CACHE BOOL  "GLFW lib only")
+set(GLFW_INSTALL OFF CACHE BOOL  "GLFW lib only")
+
+# add glfw subdirectory after having found OpenGL
+add_subdirectory(glfw)
+
+if(MSVC)
+	SET( CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /ENTRY:mainCRTStartup" )
+endif()
+
+#set(GLFW-CMAKE-STARTER-SRC main.cpp)		
+#add_executable(GLFW-CMake-starter WIN32 ${GLFW-CMAKE-STARTER-SRC})
+#target_link_libraries(GLFW-CMake-starter ${OPENGL_LIBRARIES} glfw)
+
+# check for CMake version
+if(MSVC AND ((${CMAKE_VERSION} VERSION_LESS "3.6.0"))) 
+		message( "\n\t[ WARNING ]\n\n\tCMake version lower than 3.6.\n\n\t - Please update CMake and rerun\n" )
+endif()
+
+# check for installation
+if(glfw OR EXISTS glfw_INCLUDE_DIR)
+	message(STATUS "> GLFW -> OK")
+else()
+	message(NOTICE "> GLFW -> NOT DETECTED")
+endif()
+if(OpenGL OR EXISTS OPENGL_INCLUDE_DIRS)
+	message(STATUS "> OpenGL -> OK")
+else()
+	message(NOTICE "> OpenGL -> NOT DETECTED")
 endif()
 
 
-# eigen configuration
-if(NOT RAYTRACING_EIGEN_GIT_SUBPACKAGES_DEPENDENCY)
-	message(STATUS "> Searching for external Eigen...")
-	find_package(Eigen3 CONFIG REQUIRED)
-endif()
-
+# Eigen3 configuration
 if(Eigen3 OR EXISTS Eigen3_INCLUDE_DIR)
 	message(STATUS "> Discovered preinstalled Eigen3")
 
 else()
-    message(NOTICE "> Missing Eigen3")
-	
-	if(RAYTRACING_EIGEN_GIT_SUBPACKAGES_DEPENDENCY)
-		# git stuff
-		message(NOTICE "> Checking submodule folder...")
-		if (
-			(NOT EXISTS ${PROJECT_SOURCE_DIR}/external/eigen) OR 
-			(NOT IS_DIRECTORY ${PROJECT_SOURCE_DIR}/external/eigen)
+	# git stuff
+	if ((NOT EXISTS ${PROJECT_SOURCE_DIR}/external/eigen) OR 
+		(NOT IS_DIRECTORY ${PROJECT_SOURCE_DIR}/external/eigen))
+		message(STATUS "> Cloning Eigen from remote...")
+		execute_process(
+			COMMAND git submodule update --init eigen
+			WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 		)
-			message(NOTICE "> Eigen gitsubmodule folder not initialized")
-			message(STATUS "> Cloning imgui from remote...")
-			execute_process(
-				COMMAND git submodule update --init eigen
-				WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
-			)
-			message(STATUS "> Finished cloning Eigen from remote")
-		endif()
 	else()
-		message(NOTICE "> Eigen submodule folder already initialized")
+		message(STATUS "> Eigen submodule folder initialized")
 	endif()
-	if(RAYTRACING_EIGEN_GIT_SUBPACKAGES_DEPENDENCY)
-		add_subdirectory(eigen)
-	endif()
+
+	add_subdirectory(eigen)
 endif()
 
 
 # imgui configuration
 if((NOT imgui) OR (NOT imgui_INCLUDE_DIR))
-	message(NOTICE "> Missing imgui")
-	message(NOTICE "> Checking submodule folder...")
 	if (
 		(NOT EXISTS ${PROJECT_SOURCE_DIR}/external/imgui) OR 
 		(NOT IS_DIRECTORY ${PROJECT_SOURCE_DIR}/external/imgui)
 	)
 		# git stuff
-		message(NOTICE "> Imgui gitsubmodule folder not initialized")
 		message(STATUS "> Cloning imgui from remote...")
 		execute_process(
 			COMMAND git submodule update --init imgui
 			WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
 		)
-		message(STATUS "> Finished cloning imgui from remote")
 	else()
-		message(NOTICE "> Imgui submodule folder already initialized")
+		message(STATUS "> Imgui submodule folder initialized")
 	endif()
 	
 	set(target_name imgui)
@@ -102,7 +92,7 @@ if((NOT imgui) OR (NOT imgui_INCLUDE_DIR))
 	
 	# setting up the target
 	add_library(${target_name} STATIC "")
-	target_link_libraries(${target_name} PRIVATE glfw)
+	target_link_libraries(${target_name} ${OPENGL_LIBRARIES} glfw)
 
 	target_sources(${target_name}
 		# cpp

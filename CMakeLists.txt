@@ -9,21 +9,20 @@ configure_file(cmake/RayTracingConfigure.h.in RayTracingConfigure.h)
 
 option(RAYTRACING_TEST_WITH_EXECUTABLES "Compile mains" ON)
 option(RAYTRACING_TEST_WITH_TESTS "Compile tests" ON)
-option(RAYTRACING_GLFW_GIT_SUBPACKAGE_DEPENDENCY "Clone and build Eigen" ON)
-option(RAYTRACING_EIGEN_GIT_SUBPACKAGE_DEPENDENCY "Clone and build Eigen" ON)
 
 
-if(APPLE)
+if(UNIX AND APPLE)
     message(STATUS "> APPLE platform detected")
-endif()
-
-if(UNIX AND NOT APPLE)
+elseif(UNIX AND NOT APPLE)
+    message(STATUS "> NON APPLE UNIX platform detected")
+elseif(UNIX AND NOT APPLE)
     message(STATUS "> APPLE platform detected")
-endif()
-
-if(WIN32)
+elseif(WIN32)
     message(STATUS "> APPLE platform detected")
+else()
+    message(NOTICE "> UNRECOGNIZED platform detected")
 endif()
+message(STATUS "> Running on ${CMAKE_SYSTEM_NAME}")
 
 
 add_subdirectory(external)
