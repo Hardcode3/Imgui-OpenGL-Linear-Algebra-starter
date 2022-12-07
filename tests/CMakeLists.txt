@@ -1,14 +1,20 @@
+message(STATUS "> Found tests directory")
+
 cmake_minimum_required(VERSION 3.10)
 
+if((NOT Eigen3) OR (NOT Eigen3_INCLUDE_DIR))
+    find_package(Eigen3 CONFIG REQUIRED)
+endif()
+
+if((NOT glfw3) OR (NOT glfw3_INCLUDE_DIR))
+    find_package(glfw3 CONFIG REQUIRED)
+endif()
+
 if(NOT TARGET sources)
-    project(imgui_test VERSION 1.0)
+    project(${PROJECT_NAME} VERSION 1.0)
     find_package(sources CONFIG REQUIRED)
     enable_testing()
 endif()
-
-find_package(imgui CONFIG REQUIRED)
-find_package(glfw3 CONFIG REQUIRED)
-find_package(Eigen3 CONFIG REQUIRED)
 
 add_executable (imgui_test imgui_test.cpp)
 target_link_libraries (imgui_test PUBLIC imgui)

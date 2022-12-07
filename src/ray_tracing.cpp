@@ -1,4 +1,3 @@
-#pragma once
 #include <ray_tracing.h>
 
 RayTracing::RayTracing() 
