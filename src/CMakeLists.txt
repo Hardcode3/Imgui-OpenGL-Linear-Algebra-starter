@@ -1,12 +1,6 @@
 message(STATUS "> Found sources directory")
 
-if((NOT Eigen3) OR (NOT Eigen3_INCLUDE_DIR))
-    find_package(Eigen3 CONFIG REQUIRED)
-endif()
 
-if((NOT glfw3) OR (NOT glfw3_INCLUDE_DIR))
-    find_package(glfw3 CONFIG REQUIRED)
-endif()
 
 set(target_name sources)
 

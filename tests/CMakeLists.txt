@@ -2,13 +2,6 @@ message(STATUS "> Found tests directory")
 
 cmake_minimum_required(VERSION 3.10)
 
-if((NOT Eigen3) OR (NOT Eigen3_INCLUDE_DIR))
-    find_package(Eigen3 CONFIG REQUIRED)
-endif()
-
-if((NOT glfw3) OR (NOT glfw3_INCLUDE_DIR))
-    find_package(glfw3 CONFIG REQUIRED)
-endif()
 
 if(NOT TARGET sources)
     project(${PROJECT_NAME} VERSION 1.0)
