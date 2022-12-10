@@ -2,6 +2,8 @@ build
 build/
 [Bb][Uu][Ii][Ll][Dd]/
 
+*.DS_Store
+
 CMakeLists.txt.user
 CMakeCache.txt
 CMakeFiles
