@@ -38,7 +38,3 @@ Generating the RUNTESTS executable (CTests) shoud output something like this:
 1>    Start 2: eigen_test
 1>2/2 Test #2: eigen_test .......................   Passed    0.03 sec
 ```
-
-# Note
-This is only a template for very specific projects, feel free to reorganize it as you wish.
-It is not meant for pros.
