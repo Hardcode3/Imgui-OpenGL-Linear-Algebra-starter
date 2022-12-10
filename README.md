@@ -1,8 +1,5 @@
-# Imgui_with_eigen_template
-A basic template cmake project including Imgui graphical user interface (working with GLFW and OpenGL3 backends) and having eigen library included for linear algebra
-- [ImGui](external/imgui) is under the MIT licence
-- [Eigen](external/eigen) is under the Apach 2.0 Licence, meaning that every changes shoud be mentioned, LICENCE, COPYRIGHTS and NOTICE shouold be clearly visible in the project
-
+# RayTracing
+A ray tracing project using [Imgui](external/imgui) as graphical user interface ([glfw](external/glfw) and OpenGL), and [Eigen3](external/eigen) as linear algebra library.
 For more details about the Apach 2.0 licence, visit [tldrlegal.com](https://tldrlegal.com/license/apache-license-2.0-(apache-2.0)).
 For more details about the MIT licence, visit [tldrlegal.com](https://tldrlegal.com/license/mit-license)
 
@@ -16,13 +13,12 @@ An organized structure has been chosen for this template.
 - [tests](tests) uses CTests to use a test driven approach during the development of the project.
 
 # Cloning
-This repository contains submodules meaning that a recursive cloning should be done.
+This repository contains submodules meaning that a recursive cloning can be done.
 To clone this repository, make sure you have git installed and clone the project into the chosen folder using 
 ```
 git clone --recursive https://github.com/Hardcode3/Imgui_with_eigen_cmake_template.git
 ```
-This will also clone Eigen from its [GitLab repository](https://gitlab.com/libeigen/eigen) into the project.
-CMake integrates it when building, there is nothing else to do.
+If no recursive statement, cmake updated the module and clones it.
 
 # Configuring and generating
 Make sure you have CMake installed and inside the clone repo, type:
