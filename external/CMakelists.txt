@@ -2,8 +2,8 @@ message(STATUS "> Found external directory")
 
 # glfw configuration	
 # checks if git submodule is already downloaded or not
-if ((NOT EXISTS ${PROJECT_SOURCE_DIR}/external/glfw) OR 
-	(NOT IS_DIRECTORY ${PROJECT_SOURCE_DIR}/external/glfw))
+if ((NOT EXISTS glfw) OR 
+	(NOT IS_DIRECTORY glfw))
 	message(STATUS "> Cloning imgui from remote...")
 	execute_process(
 		COMMAND git submodule update --init glfw
@@ -29,8 +29,8 @@ endif()
 
 
 # Eigen3 configuration
-if ((NOT EXISTS ${PROJECT_SOURCE_DIR}/external/eigen) OR 
-	(NOT IS_DIRECTORY ${PROJECT_SOURCE_DIR}/external/eigen))
+if ((NOT EXISTS eigen) OR 
+	(NOT IS_DIRECTORY eigen))
 	message(STATUS "> Cloning Eigen from remote...")
 	execute_process(
 		COMMAND git submodule update --init eigen
@@ -45,8 +45,8 @@ add_subdirectory(eigen)
 
 
 # Imgui configuration
-if ((NOT EXISTS ${PROJECT_SOURCE_DIR}/external/imgui) OR 
-	(NOT IS_DIRECTORY ${PROJECT_SOURCE_DIR}/external/imgui))
+if ((NOT EXISTS imgui) OR 
+	(NOT IS_DIRECTORY imgui))
 	message(STATUS "> Cloning imgui from remote...")
 	execute_process(
 		COMMAND git submodule update --init imgui
