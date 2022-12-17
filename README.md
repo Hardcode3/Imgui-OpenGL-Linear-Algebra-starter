@@ -1,7 +1,8 @@
 # Imgui & OpenGL template
 
-![licence](https://img.shields.io/github/license/Hardcode3/Imgui-OpenGL-Linear-Algebra-starter)
-![os support](https://img.shields.io/static/v1?label=Supports&message=Windows|Linux|MacOS&color=<COLOR>)
+![licence](https://img.shields.io/static/v1?label=Licence&message=MIT&color=yellow)
+![os support](https://img.shields.io/static/v1?label=Supports&message=Windows|Linux|MacOS&color=blue)
+![repo size](https://img.shields.io/github/repo-size/Hardcode3/Imgui-OpenGL-Linear-Algebra-starter)
 
 A template project using [Imgui](external/imgui) as graphical user interface ([glfw](external/glfw), [glm](external/glm), [glew](external/glew) and OpenGL), and [Eigen3](external/eigen) as linear algebra library.
 For more details about the Apach 2.0 licence, visit [tldrlegal.com](https://tldrlegal.com/license/apache-license-2.0-(apache-2.0)).
