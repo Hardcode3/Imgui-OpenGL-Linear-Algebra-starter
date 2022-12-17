@@ -1,5 +1,5 @@
-# RayTracing
-A ray tracing project using [Imgui](external/imgui) as graphical user interface ([glfw](external/glfw) and OpenGL), and [Eigen3](external/eigen) as linear algebra library.
+# Imgui & OpenGL template
+A template project using [Imgui](external/imgui) as graphical user interface ([glfw](external/glfw), [glm](external/glm), [glew](external/glew) and OpenGL), and [Eigen3](external/eigen) as linear algebra library.
 For more details about the Apach 2.0 licence, visit [tldrlegal.com](https://tldrlegal.com/license/apache-license-2.0-(apache-2.0)).
 For more details about the MIT licence, visit [tldrlegal.com](https://tldrlegal.com/license/mit-license)
 
@@ -31,10 +31,16 @@ cmake --build .
 Or use CMakeGui for this.
 For more details, check [cmake.org](https://cmake.org/)
 
-Generating the RUNTESTS executable (CTests) shoud output something like this:
+Generating the RUNTESTS executable (CTests) should output something like this if everything is well configured:
 ```
-1>    Start 1: imgui_test
-1>1/2 Test #1: imgui_test .......................   Passed    0.77 sec
-1>    Start 2: eigen_test
-1>2/2 Test #2: eigen_test .......................   Passed    0.03 sec
+2>    Start 1: imgui_test
+2>1/3 Test #1: imgui_test .......................   Passed    0.73 sec
+2>    Start 2: eigen_test
+2>2/3 Test #2: eigen_test .......................   Passed    0.02 sec
+2>    Start 3: glew_glfw_test
+2>3/3 Test #3: glew_glfw_test ...................   Passed    0.64 sec
+2>
+2>100% tests passed, 0 tests failed out of 3
+2>
+2>Total Test time (real) =   1.40 sec
 ```

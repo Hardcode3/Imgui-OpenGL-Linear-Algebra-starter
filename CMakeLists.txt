@@ -7,12 +7,19 @@ project("RayTracing" VERSION 1.0)
 
 configure_file(cmake/RayTracingConfigure.h.in RayTracingConfigure.h)
 
+# internal targets
 option(RAYTRACING_TEST_WITH_EXECUTABLES "Compile mains" ON)
 option(RAYTRACING_TEST_WITH_TESTS "Compile tests" ON)
 
+# external dependencies
+option(RAYTRACING_CLONE_GLEW "Initialize glew from remote repository as git submodule" ON)
+option(RAYTRACING_CLONE_GLFW "Initialize glfw from remote repository as git submodule" ON)
+option(RAYTRACING_CLONE_GLM "Initialize glm from remote repository as git submodule" ON)
+option(RAYTRACING_CLONE_EIGEN "Initialize Eigen3 from remote repository as git submodule" ON)
+option(RAYTRACING_CLONE_IMGUI "Initialize imgui from remote repository as git submodule" ON)
 
 if(WIN32)
-    message(STATUS "> APPLE platform detected")
+    message(STATUS "> Windows platform detected")
 elseif(UNIX)
     if(APPLE)
         message(STATUS "> APPLE platform detected")
