@@ -11,7 +11,6 @@ if ((NOT EXISTS glew) OR
 else()
 	message(STATUS "> Found glew submodule folder")
 endif()
-add_subdirectory(glew/build/cmake)
 
 
 # glfw configuration	
