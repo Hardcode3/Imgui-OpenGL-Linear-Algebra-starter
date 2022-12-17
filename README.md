@@ -1,6 +1,5 @@
 # Imgui & OpenGL template
 
-![Configuration & Build](https://github.com/Hardcode3/Imgui-OpenGL-Linear-Algebra-starter/actions/workflows/configurenbuild.yml/badge.svg?branch=master)
 ![licence](https://img.shields.io/github/license/Hardcode3/Imgui-OpenGL-Linear-Algebra-starter)
 ![os support](https://img.shields.io/static/v1?label=Supports&message=Windows|Linux|MacOS&color=<COLOR>)
 
