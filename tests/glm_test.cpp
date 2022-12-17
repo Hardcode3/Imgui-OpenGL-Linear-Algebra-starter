@@ -1,12 +1,13 @@
 #include <glm/glm.hpp>
-#include <iostream>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/transform.hpp>
 
+// from https://opengl.developpez.com/tutoriels/opengl-tutorial/3-matrices/
 int main()
 {
     glm::mat4 myMatrix;
     glm::vec4 myVector;
-    // remplir myMatrix et myVector d'une façon ou d'une autre
-    glm::vec4 transformedVector = myMatrix * myVector; // Encore, dans cet ordre ! C'est important.
-    std::cout << myMatrix << std::endl;
+    glm::vec4 transformedVector = myMatrix * myVector;
+
     return 0;
 }
