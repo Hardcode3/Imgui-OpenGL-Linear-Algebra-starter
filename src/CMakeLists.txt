@@ -1,12 +1,11 @@
 message(STATUS "> Found sources directory")
 
+set(CMAKE_FOLDER sources)
 set(target_name sources)
 
 add_library(${target_name} STATIC "")
 
-target_link_libraries(${target_name} PRIVATE Eigen3::Eigen)
-target_link_libraries(${target_name} PRIVATE glfw)
-target_link_libraries(${target_name} PRIVATE imgui)
+target_link_libraries(${target_name} PRIVATE externals)
 
 target_sources(${target_name}
     PRIVATE
