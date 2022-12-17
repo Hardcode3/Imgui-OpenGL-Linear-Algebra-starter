@@ -21,3 +21,7 @@ add_test(NAME eigen_test COMMAND eigen_test)
 add_executable(glew_glfw_test glew_glfw_test.cpp)
 target_link_libraries(glew_glfw_test PUBLIC externals libglew_static)
 add_test(NAME glew_glfw_test COMMAND glew_glfw_test)
+
+add_executable(glm_test glm_test.cpp)
+target_link_libraries(glm_test PUBLIC externals)
+add_test(NAME glm_test COMMAND glm_test)
