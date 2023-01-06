@@ -4,11 +4,22 @@
 ![os support](https://img.shields.io/static/v1?label=Supports&message=Windows|Linux|MacOS&color=blue)
 ![repo size](https://img.shields.io/github/repo-size/Hardcode3/Imgui-OpenGL-Linear-Algebra-starter)
 
-A template project using [Imgui](external/imgui) as graphical user interface ([glfw](external/glfw), [glm](external/glm), [glew](external/glew) and OpenGL), and [Eigen3](external/eigen) as linear algebra library.
+A template project using [Imgui](external/imgui) as graphical user interface ([glfw](external/glfw), [glm](external/glm), [glew](external/glew) and [OpenGL](https://www.opengl.org/)), and [Eigen3](external/eigen) as linear algebra library.
 For more details about the Apach 2.0 licence, visit [tldrlegal.com](https://tldrlegal.com/license/apache-license-2.0-(apache-2.0)).
 For more details about the MIT licence, visit [tldrlegal.com](https://tldrlegal.com/license/mit-license)
 
-# Structure
+## Dependencies
+
+The code is build to run with the following libraries (included in the repository under [external](external/)):
+
+- [OpenGL](https://www.opengl.org/) (should be installed on your computer)
+- [GLEW](https://glew.sourceforge.net/) (included)
+- [GLFW](https://www.glfw.org/) (included)
+- [GLM](https://github.com/g-truc/glm) (included)
+- [ImGui](https://github.com/ocornut/imgui) (included)
+- [Eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page) (included)
+
+## Structure
 
 An organized structure has been chosen for this template.
 
@@ -19,22 +30,69 @@ An organized structure has been chosen for this template.
 - [src](src) gather every self written cpp file of the project.
 - [tests](tests) uses CTests to use a test driven approach during the development of the project.
 
-# Cloning
+## Cloning
 
 This repository contains submodules meaning that a recursive cloning can be done.
 To clone this repository, make sure you have git installed and clone the project into the chosen folder using
 
-```
+```git bash
 git clone --recursive https://github.com/Hardcode3/Imgui_with_eigen_cmake_template.git
 ```
 
 If no recursive statement, cmake updated the module and clones it.
 
-# Configuring and generating
+## Configuring and generating
+
+The build steps has been tested and runs fine on:
+
+- Microsoft Windows 10, 11
+- MacOSX
+- Linux Ubuntu
+
+### Configuration steps on Linux
+
+Configuration on Linux requires additional libraries:
+If required, run the following commands to install needed libraries (detailed in the cmake configuration and building process):
+
+```bash
+sudo apt-get update -y
+```
+
+Install OpenGL if needed:
+
+```bash
+sudo apt-get install libglu1-mesa-dev freeglut3-dev mesa-common-dev
+```
+
+```bash
+sudo apt-get install -y libxrandr-dev
+```
+
+```bash
+sudo apt-get install -y libxinerama-dev
+```
+
+```bash
+sudo apt-get install -y libxcursor-dev
+```
+
+```bash
+sudo apt-get install -y libxi-dev
+```
+
+### Configuration steps on macOS
+
+There is no additional configuration step on macOS.
+
+### Configuration steps on Windows
+
+There is no additional configuration step on Windows.
+
+### General configuration & build process
 
 Make sure you have CMake installed and inside the clone repo, type:
 
-```
+```bash cmd terminal
 mkdir build
 cd build
 cmake ..
@@ -46,7 +104,7 @@ For more details, check [cmake.org](https://cmake.org/)
 
 Generating the RUNTESTS executable (CTests) should output something like this if everything is well configured:
 
-```
+```text
 1>    Start 1: imgui_test
 1>1/4 Test #1: imgui_test .......................   Passed    0.67 sec
 1>    Start 2: eigen_test
